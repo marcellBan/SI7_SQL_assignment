@@ -7,6 +7,16 @@ import os
 import ui
 import business
 
+MENU_ITEMS = (
+    'First task',
+    'Second task',
+    'Third task',
+    'Fourth task',
+    'Fifth task',
+    'Sixth task',
+    'Seventh task'
+)
+
 
 def main():
     # get connection data from the environment
@@ -20,10 +30,10 @@ def main():
     if db_cursor is not None:
         # generates the list of valid selection options
         # (numbers from 0 to 7 in str form)
-        valid_selections = [str(x) for x in range(8)]
+        valid_selections = [str(x) for x in range(len(MENU_ITEMS))]
         running = True
         while running:
-            ui.display_menu()
+            ui.display_menu(MENU_ITEMS)
             selection = None
             while selection not in valid_selections:
                 selection = ui.get_input('Please select a menu item: ')
