@@ -5,6 +5,9 @@ by night5word (Marcell Bán)
 
 from terminaltables import SingleTable
 
+SEP_CHAR = '='
+SEP_WIDTH = 50
+
 
 def display_menu(menu_items):
     menu_counter = 1
@@ -22,3 +25,8 @@ def display_results_table(pretable_text, headers, results):
     print(pretable_text)
     results.insert(0, headers)
     print(SingleTable(results).table)
+    print(get_separator())
+
+
+def get_separator():
+    return SEP_CHAR * SEP_WIDTH

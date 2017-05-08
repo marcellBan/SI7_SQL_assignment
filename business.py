@@ -24,12 +24,22 @@ def first_task(cursor):
     query = "SELECT first_name, last_name FROM mentors"
     cursor.execute(query)
     results = cursor.fetchall()
-    ui.display_results_table('First task\nFirst and last names of all the mentors',
-                             ('First name', 'Last name'), results)
+    pretext = ui.get_separator()
+    pretext += '\nFirst task:\n'
+    pretext += ui.get_separator()
+    pretext += '\nFirst and last names of all the mentors'
+    ui.display_results_table(pretext, ('First name', 'Last name'), results)
 
 
 def second_task(cursor):
-    pass
+    query = "SELECT nick_name FROM mentors WHERE city='Miskolc'"
+    cursor.execute(query)
+    results = cursor.fetchall()
+    pretext = ui.get_separator()
+    pretext += '\nSecond task:\n'
+    pretext += ui.get_separator()
+    pretext += '\nNicknames of the mentors located at Miskolc'
+    ui.display_results_table(pretext, ('Nickname',), results)
 
 
 def third_task(cursor):
