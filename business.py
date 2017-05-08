@@ -5,6 +5,7 @@ by night5word (Marcell Bán)
 
 import psycopg2
 import sys
+import ui
 
 
 def connect_to_db(connection_data):
@@ -20,7 +21,11 @@ def connect_to_db(connection_data):
 
 
 def first_task(cursor):
-    pass
+    query = "SELECT first_name, last_name FROM mentors"
+    cursor.execute(query)
+    results = cursor.fetchall()
+    ui.display_results_table('First task\nFirst and last names of all the mentors',
+                             ('First name', 'Last name'), results)
 
 
 def second_task(cursor):
