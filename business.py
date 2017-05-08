@@ -78,13 +78,22 @@ def fifth_task(cursor):
     pretext += '\nFifth task:\n'
     pretext += ui.get_separator()
     pretext += '\nInserted the new applicant below'
-    ui.display_results_table(pretext,
-                             ('ID', 'First name', 'Last name', 'Phone number', 'Email', 'Application code'),
-                             results)
+    headers = ('ID', 'First name', 'Last name', 'Phone number', 'Email', 'Application code')
+    ui.display_results_table(pretext, headers, results)
 
 
 def sixth_task(cursor):
-    pass
+    query = "UPDATE applicants SET phone_number=%s WHERE first_name='Jemima' AND last_name='Foreman'"
+    cursor.execute(query, ('003670/223-7459',))
+    query = "SELECT first_name, last_name, phone_number FROM applicants "
+    query += "WHERE first_name='Jemima' AND last_name='Foreman'"
+    cursor.execute(query)
+    results = cursor.fetchall()
+    pretext = ui.get_separator()
+    pretext += '\nSixth task:\n'
+    pretext += ui.get_separator()
+    pretext += '\nChanged Jemima Foreman\'s phone number'
+    ui.display_results_table(pretext, ('First name', 'Last name', 'Phone number'), results)
 
 
 def seventh_task(cursor):
