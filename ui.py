@@ -28,5 +28,10 @@ def display_results_table(pretable_text, headers, results):
     print(get_separator())
 
 
+def display_message(message):
+    print(message)
+    print(get_separator())
+
+
 def get_separator():
     return SEP_CHAR * SEP_WIDTH

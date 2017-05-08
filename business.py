@@ -97,4 +97,10 @@ def sixth_task(cursor):
 
 
 def seventh_task(cursor):
-    pass
+    query = "DELETE FROM applicants WHERE email LIKE '%@mauriseu.net'"
+    cursor.execute(query)
+    pretext = ui.get_separator()
+    pretext += '\nSeventh task:\n'
+    pretext += ui.get_separator()
+    pretext += '\nDeleted the applicants with the domain "mauriseu.net"'
+    ui.display_message(pretext)

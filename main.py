@@ -30,7 +30,7 @@ def main():
     if db_cursor is not None:
         # generates the list of valid selection options
         # (numbers from 0 to 7 in str form)
-        valid_selections = [str(x) for x in range(len(MENU_ITEMS))]
+        valid_selections = [str(x) for x in range(len(MENU_ITEMS) + 1)]
         running = True
         while running:
             ui.display_menu(MENU_ITEMS)
