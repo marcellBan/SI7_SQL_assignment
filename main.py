@@ -39,20 +39,8 @@ def main():
                 selection = ui.get_input('Please select a menu item: ')
             if selection == '0':
                 running = False
-            elif selection == '1':
-                business.first_task(db_cursor)
-            elif selection == '2':
-                business.second_task(db_cursor)
-            elif selection == '3':
-                business.third_task(db_cursor)
-            elif selection == '4':
-                business.fourth_task(db_cursor)
-            elif selection == '5':
-                business.fifth_task(db_cursor)
-            elif selection == '6':
-                business.sixth_task(db_cursor)
-            elif selection == '7':
-                business.seventh_task(db_cursor)
+            else:
+                business.TASKS[selection](db_cursor)
     else:
         print('Sorry something went wrong while connecting to the database.')
 

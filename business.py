@@ -104,3 +104,13 @@ def seventh_task(cursor):
     pretext += ui.get_separator()
     pretext += '\nDeleted the applicants with the domain "mauriseu.net"'
     ui.display_message(pretext)
+
+TASKS = {
+    '1': first_task,
+    '2': second_task,
+    '3': third_task,
+    '4': fourth_task,
+    '5': fifth_task,
+    '6': sixth_task,
+    '7': seventh_task
+}
