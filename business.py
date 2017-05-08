@@ -44,7 +44,7 @@ def second_task(cursor):
 
 def third_task(cursor):
     query = "SELECT CONCAT_WS(' ', first_name, last_name) AS full_name, phone_number "
-    query += "FROM applicants WHERE first_name ='Carol'"
+    query += "FROM applicants WHERE first_name='Carol'"
     cursor.execute(query)
     results = cursor.fetchall()
     pretext = ui.get_separator()
@@ -55,7 +55,15 @@ def third_task(cursor):
 
 
 def fourth_task(cursor):
-    pass
+    query = "SELECT CONCAT_WS(' ', first_name, last_name) AS full_name, phone_number "
+    query += "FROM applicants WHERE email LIKE '%@adipiscingenimmi.edu'"
+    cursor.execute(query)
+    results = cursor.fetchall()
+    pretext = ui.get_separator()
+    pretext += '\nFourth task:\n'
+    pretext += ui.get_separator()
+    pretext += '\nFull name and phone number of the other girl'
+    ui.display_results_table(pretext, ('Full name', 'Phone number'), results)
 
 
 def fifth_task(cursor):
