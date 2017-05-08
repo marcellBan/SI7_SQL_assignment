@@ -67,7 +67,20 @@ def fourth_task(cursor):
 
 
 def fifth_task(cursor):
-    pass
+    query = "INSERT INTO applicants (first_name, last_name, phone_number, email, application_code) "
+    query += "VALUES (%s, %s, %s, %s, %s)"
+    data = ('Markus', 'Schaffarzyk', '003620/725-2666', 'djnovus@groovecoverage.com', 54823)
+    cursor.execute(query, data)
+    query = "SELECT * FROM applicants WHERE application_code=54823"
+    cursor.execute(query)
+    results = cursor.fetchall()
+    pretext = ui.get_separator()
+    pretext += '\nFifth task:\n'
+    pretext += ui.get_separator()
+    pretext += '\nInserted the new applicant below'
+    ui.display_results_table(pretext,
+                             ('ID', 'First name', 'Last name', 'Phone number', 'Email', 'Application code'),
+                             results)
 
 
 def sixth_task(cursor):
