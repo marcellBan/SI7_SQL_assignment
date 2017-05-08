@@ -40,7 +40,10 @@ def main():
             if selection == '0':
                 running = False
             else:
-                business.TASKS[selection](db_cursor)
+                try:
+                    business.TASKS[selection](db_cursor)
+                except Exception as e:
+                    ui.display_error(e)
     else:
         print('Sorry something went wrong while connecting to the database.')
 

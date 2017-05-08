@@ -4,7 +4,6 @@ by night5word (Marcell Bán)
 '''
 
 import psycopg2
-import sys
 import ui
 
 
@@ -16,7 +15,7 @@ def connect_to_db(connection_data):
         connection.autocommit = True
         return connection.cursor()
     except Exception as e:
-        print(e, file=sys.stderr)
+        ui.display_error(e)
         return None
 
 

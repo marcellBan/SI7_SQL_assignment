@@ -3,6 +3,7 @@ display and input functions for the SI7 SQL assignment
 by night5word (Marcell Bán)
 '''
 
+import sys
 from terminaltables import SingleTable
 
 SEP_CHAR = '='
@@ -31,6 +32,10 @@ def display_results_table(pretable_text, headers, results):
 def display_message(message):
     print(message)
     print(get_separator())
+
+
+def display_error(error):
+    print(error, file=sys.stderr)
 
 
 def get_separator():
