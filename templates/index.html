@@ -1,16 +1,20 @@
 {% extends "layout.html" %}
 {% block title %}Index{% endblock %}
 {% block content %}
-  <h2>Old tasks</h2>
-  <ul>
-  {% for item in menu.old_tasks %}
-    <li><a href="{{ item[1] }}">{{ item[0] }}</a></li>
-  {% endfor %}
-  </ul>
-  <h2>New tasks</h2>
-  <ul>
-  {% for item in menu.new_tasks %}
-    <li><a href="{{ item[1] }}">{{ item[0] }}</a></li>
-  {% endfor %}
-  </ul>
+  <article class="fleft">
+    <h2>Old tasks</h2>
+    <ul>
+    {% for item in menu.old_tasks %}
+      <li><a href="{{ item[1] }}">{{ item[0] }}</a></li>
+    {% endfor %}
+    </ul>
+  </article>
+  <article class="fright">
+    <h2>New tasks</h2>
+    <ul>
+    {% for item in menu.new_tasks %}
+      <li><a href="{{ item[1] }}">{{ item[0] }}</a></li>
+    {% endfor %}
+    </ul>
+  </article>
 {% endblock %}

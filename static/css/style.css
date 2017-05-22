@@ -1,0 +1,108 @@
+* {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  z-index: 0;
+}
+
+body {
+  font-size: 16px;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  color: #E8EAF6;
+  background: #303F9F;
+  text-shadow: 0.05rem 0.05rem black;
+}
+
+header {
+  position: fixed;
+  width: 100%;
+  text-align: center;
+  background: linear-gradient(#303F9F, #3F51B5);
+  border-bottom: solid rgba(159, 168, 218, 0.6) 0.15rem;
+  top: 0;
+  z-index: 10;
+}
+
+h1, h2 {
+  margin: 0.5rem auto;
+  text-shadow: 0.1rem 0.1rem black;
+}
+
+h1{
+  font-size: 2rem;
+}
+
+h2 {
+  font-size: 1.5rem;
+}
+
+#content {
+  position: relative;
+  top: 4rem;
+  width: 65vw;
+  min-height: calc(100vh - 8.05rem);
+  margin: auto;
+  padding: 0.5rem 0;
+  text-align: center;
+  background: #283593;
+  border-radius: 0.5rem 0.5rem 0.5rem 0.5rem;
+  border: solid rgba(159, 168, 218, 0.6) 0.15rem;
+}
+
+footer {
+  position: relative;
+  top: 4rem;
+  width: 100%;
+  margin: auto;
+  text-align: center;
+  padding: 0.5rem 0;
+  margin-top: 0.5rem;
+  background: linear-gradient(#3949AB, #303F9F);
+  border-top: solid rgba(159, 168, 218, 0.6) 0.15rem;
+}
+
+table {
+  border: solid rgba(159, 168, 218, 0.6) 0.15rem;
+  border-collapse: collapse;
+  margin: auto;
+}
+
+th, td {
+  border: solid rgba(197, 202, 233, 0.3) 0.1rem;
+  padding: 0.2rem 0.5rem;
+}
+
+li {
+  list-style-type: none;
+}
+
+a, a:hover, a:visited, a:active{
+  display: inline-block;
+  margin: 0.5rem 0 0.2rem;
+  padding: 0.4rem;
+  border-radius: 0.3rem;
+  background: #5C6BC0;
+  text-decoration: none;
+  color: #1A237E;
+}
+
+a:hover {
+  background: #9FA8DA;
+  color: #283593;
+}
+
+a:active {
+  color: #5C6BC0;
+}
+
+article {
+  width: 50%;
+}
+
+.fleft {
+  float: left;
+}
+
+.fright {
+  float: right;
+}
