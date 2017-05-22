@@ -25,6 +25,11 @@ def mentors_and_schools():
     return render_template('display_results.html', data=business.mentors_and_schools())
 
 
+@app.route('/all-school')
+def all_schools():
+    return render_template('display_results.html', data=business.all_schools())
+
+
 @app.errorhandler(500)
 def internal_error(error_message):
     return render_template('500.html', message=error_message), 500

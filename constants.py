@@ -22,5 +22,6 @@ MENU_ITEMS = {
     ),
     'new_tasks': (
         ('Mentors and schools', '/mentors'),
+        ('All schools', '/all-school')
     )
 }

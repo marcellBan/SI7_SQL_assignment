@@ -51,3 +51,22 @@ def mentors_and_schools():
         ],
         'table': results
     }
+
+
+@connect_to_db
+def all_schools():
+    query = '''SELECT m.first_name, m.last_name, s.name, s.country
+                 FROM mentors m
+                 RIGHT OUTER JOIN schools s
+                   ON m.city = s.city
+                 ORDER BY m.id'''
+    cursor.execute(query)
+    results = cursor.fetchall()
+    return {
+        'title': 'Mentors and schools',
+        'text': 'All mentors and their schools',
+        'headers': [
+            'First name', 'Last name', 'School name', 'School country'
+        ],
+        'table': results
+    }
