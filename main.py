@@ -40,6 +40,11 @@ def contacts():
     return render_template('display_results.html', data=business.contacts())
 
 
+@app.route('/applicants')
+def applicants():
+    return render_template('display_results.html', data=business.applicants())
+
+
 @app.errorhandler(500)
 def internal_error(error_message):
     return render_template('500.html', message=error_message), 500

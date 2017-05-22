@@ -109,3 +109,23 @@ def contacts():
         ],
         'table': results
     }
+
+
+@connect_to_db
+def applicants():
+    query = '''SELECT a.first_name, a.application_code, am.creation_date
+                 FROM applicants a
+                 INNER JOIN applicants_mentors am
+                   ON a.id = am.applicant_id
+                 WHERE am.creation_date > '2016-01-01'
+                 ORDER BY am.creation_date DESC;'''
+    cursor.execute(query)
+    results = cursor.fetchall()
+    return {
+        'title': 'Applicants',
+        'text': 'All applicants after 2016-01-01',
+        'headers': [
+            'First name', 'Application code', 'Creation date'
+        ],
+        'table': results
+    }

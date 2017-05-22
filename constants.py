@@ -24,6 +24,7 @@ MENU_ITEMS = {
         ('Mentors and schools', '/mentors'),
         ('All schools', '/all-school'),
         ('Mentors by country', '/mentors-by-country'),
-        ('Contacts', '/contacts')
+        ('Contacts', '/contacts'),
+        ('Applicants', '/applicants')
     )
 }
