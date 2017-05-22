@@ -106,3 +106,10 @@ article {
 .fright {
   float: right;
 }
+
+#content pre {
+  text-align: left;
+  margin: 1rem 0.5rem;
+  padding: 0.5rem;
+  background: #303F9F;
+}
