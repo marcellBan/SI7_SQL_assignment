@@ -54,5 +54,10 @@ def applicants_and_mentors():
 def internal_error(error_message):
     return render_template('500.html', message=error_message), 500
 
+
+@app.errorhandler(404)
+def not_found(e):
+    return render_template('404.html'), 404
+
 if __name__ == '__main__':
     app.run()
