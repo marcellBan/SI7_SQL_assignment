@@ -129,3 +129,24 @@ def applicants():
         ],
         'table': results
     }
+
+
+@connect_to_db
+def applicants_and_mentors():
+    query = '''SELECT a.first_name, a.application_code, m.first_name, m.last_name
+                 FROM applicants a
+                 LEFT OUTER JOIN applicants_mentors am
+                   ON a.id = am.applicant_id
+                 LEFT OUTER JOIN mentors m
+                   ON am.mentor_id = m.id
+                 ORDER BY a.id;'''
+    cursor.execute(query)
+    results = cursor.fetchall()
+    return {
+        'title': 'Applicants and mentors',
+        'text': 'All applicants and their mentors',
+        'headers': [
+            'Applicant first name', 'Application code', 'Mentor first name', 'Mentor last name'
+        ],
+        'table': results
+    }
