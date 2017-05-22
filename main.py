@@ -5,6 +5,7 @@ by night5word (Marcell Bán)
 
 from flask import Flask, render_template
 from constants import MENU_ITEMS, OLD_TASKS
+import business
 
 app = Flask(__name__)
 

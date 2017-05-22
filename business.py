@@ -32,3 +32,22 @@ def connect_to_db(func):
         except Exception as e:
             abort(500, e)
     return wrapper
+
+
+@connect_to_db
+def mentors_and_schools():
+    query = '''SELECT m.first_name, m.last_name, s.name, s.country
+                 FROM mentors m
+                 INNER JOIN schools s
+                   ON m.city = s.city
+                 ORDER BY m.id'''
+    cursor.execute(query)
+    results = cursor.fetchall()
+    return {
+        'title': 'Mentors and schools',
+        'text': 'All mentors and their schools',
+        'headers': [
+            'First name', 'Last name', 'School name', 'School country'
+        ],
+        'table': results
+    }

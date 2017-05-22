@@ -20,5 +20,7 @@ MENU_ITEMS = {
         ('Sixth task', '/old/6'),
         ('Seventh task', '/old/7')
     ),
-    'new_tasks': ()
+    'new_tasks': (
+        ('Mentors and schools', '/mentors'),
+    )
 }
