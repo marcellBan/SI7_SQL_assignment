@@ -40,7 +40,7 @@ def mentors_and_schools():
                  FROM mentors m
                  INNER JOIN schools s
                    ON m.city = s.city
-                 ORDER BY m.id'''
+                 ORDER BY m.id;'''
     cursor.execute(query)
     results = cursor.fetchall()
     return {
@@ -59,11 +59,11 @@ def all_schools():
                  FROM mentors m
                  RIGHT OUTER JOIN schools s
                    ON m.city = s.city
-                 ORDER BY m.id'''
+                 ORDER BY m.id;'''
     cursor.execute(query)
     results = cursor.fetchall()
     return {
-        'title': 'Mentors and schools',
+        'title': 'All schools',
         'text': 'All mentors and all schools',
         'headers': [
             'First name', 'Last name', 'School name', 'School country'
@@ -79,15 +79,33 @@ def mentors_by_country():
                  RIGHT OUTER JOIN schools s
                    ON m.city = s.city
                  GROUP BY s.country
-                 ORDER BY s.country'''
+                 ORDER BY s.country;'''
     cursor.execute(query)
     results = cursor.fetchall()
     return {
-        'title': 'Mentors and schools',
-        'text': 'All mentors and their schools',
+        'title': 'Mentors by country',
+        'text': 'Mentor count per country',
         'headers': [
             'Country', 'Mentor count'
         ],
         'table': results
     }
 
+
+@connect_to_db
+def contacts():
+    query = '''SELECT s.name, m.first_name, m.last_name
+                 FROM schools s
+                 INNER JOIN mentors m
+                   ON s.contact_person = m.id
+                 ORDER BY s.name;'''
+    cursor.execute(query)
+    results = cursor.fetchall()
+    return {
+        'title': 'Contacts',
+        'text': 'Contact names',
+        'headers': [
+            'School name', 'Contact first name', 'Contact last name'
+        ],
+        'table': results
+    }

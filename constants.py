@@ -23,6 +23,7 @@ MENU_ITEMS = {
     'new_tasks': (
         ('Mentors and schools', '/mentors'),
         ('All schools', '/all-school'),
-        ('Mentors by country', '/mentors-by-country')
+        ('Mentors by country', '/mentors-by-country'),
+        ('Contacts', '/contacts')
     )
 }
