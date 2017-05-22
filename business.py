@@ -64,9 +64,30 @@ def all_schools():
     results = cursor.fetchall()
     return {
         'title': 'Mentors and schools',
-        'text': 'All mentors and their schools',
+        'text': 'All mentors and all schools',
         'headers': [
             'First name', 'Last name', 'School name', 'School country'
         ],
         'table': results
     }
+
+
+@connect_to_db
+def mentors_by_country():
+    query = '''SELECT s.country, COUNT(m.id) AS "count"
+                 FROM mentors m
+                 RIGHT OUTER JOIN schools s
+                   ON m.city = s.city
+                 GROUP BY s.country
+                 ORDER BY s.country'''
+    cursor.execute(query)
+    results = cursor.fetchall()
+    return {
+        'title': 'Mentors and schools',
+        'text': 'All mentors and their schools',
+        'headers': [
+            'Country', 'Mentor count'
+        ],
+        'table': results
+    }
+
