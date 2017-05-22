@@ -1,115 +1,34 @@
 '''
-business logic for the SI7 SQL assignment
+business logic for the SI8 SQL assignment
 by night5word (Marcell Bán)
 '''
 
+import os
 import psycopg2
-import ui
+from flask import abort
 
 
-def connect_to_db(connection_data):
-    connect_string = "dbname='{dbname}' user='{user}' host='{host}' password='{password}'"
-    connect_string = connect_string.format(**connection_data)
-    try:
-        connection = psycopg2.connect(connect_string)
-        connection.autocommit = True
-        return connection.cursor()
-    except Exception as e:
-        ui.display_error(e)
-        return None
-
-
-def first_task(cursor):
-    query = "SELECT first_name, last_name FROM mentors"
-    cursor.execute(query)
-    results = cursor.fetchall()
-    pretext = ui.get_separator()
-    pretext += '\nFirst task:\n'
-    pretext += ui.get_separator()
-    pretext += '\nFirst and last names of all the mentors'
-    ui.display_results_table(pretext, ('First name', 'Last name'), results)
-
-
-def second_task(cursor):
-    query = "SELECT nick_name FROM mentors WHERE city='Miskolc'"
-    cursor.execute(query)
-    results = cursor.fetchall()
-    pretext = ui.get_separator()
-    pretext += '\nSecond task:\n'
-    pretext += ui.get_separator()
-    pretext += '\nNicknames of the mentors located at Miskolc'
-    ui.display_results_table(pretext, ('Nickname',), results)
-
-
-def third_task(cursor):
-    query = "SELECT CONCAT_WS(' ', first_name, last_name) AS full_name, phone_number "
-    query += "FROM applicants WHERE first_name='Carol'"
-    cursor.execute(query)
-    results = cursor.fetchall()
-    pretext = ui.get_separator()
-    pretext += '\nThird task:\n'
-    pretext += ui.get_separator()
-    pretext += '\nFull name and phone number of Carol'
-    ui.display_results_table(pretext, ('Full name', 'Phone number'), results)
-
-
-def fourth_task(cursor):
-    query = "SELECT CONCAT_WS(' ', first_name, last_name) AS full_name, phone_number "
-    query += "FROM applicants WHERE email LIKE '%@adipiscingenimmi.edu'"
-    cursor.execute(query)
-    results = cursor.fetchall()
-    pretext = ui.get_separator()
-    pretext += '\nFourth task:\n'
-    pretext += ui.get_separator()
-    pretext += '\nFull name and phone number of the other girl'
-    ui.display_results_table(pretext, ('Full name', 'Phone number'), results)
-
-
-def fifth_task(cursor):
-    query = "INSERT INTO applicants (first_name, last_name, phone_number, email, application_code) "
-    query += "VALUES (%s, %s, %s, %s, %s)"
-    data = ('Markus', 'Schaffarzyk', '003620/725-2666', 'djnovus@groovecoverage.com', 54823)
-    cursor.execute(query, data)
-    query = "SELECT * FROM applicants WHERE application_code=54823"
-    cursor.execute(query)
-    results = cursor.fetchall()
-    pretext = ui.get_separator()
-    pretext += '\nFifth task:\n'
-    pretext += ui.get_separator()
-    pretext += '\nInserted the new applicant below'
-    headers = ('ID', 'First name', 'Last name', 'Phone number', 'Email', 'Application code')
-    ui.display_results_table(pretext, headers, results)
-
-
-def sixth_task(cursor):
-    query = "UPDATE applicants SET phone_number=%s WHERE first_name='Jemima' AND last_name='Foreman'"
-    cursor.execute(query, ('003670/223-7459',))
-    query = "SELECT first_name, last_name, phone_number FROM applicants "
-    query += "WHERE first_name='Jemima' AND last_name='Foreman'"
-    cursor.execute(query)
-    results = cursor.fetchall()
-    pretext = ui.get_separator()
-    pretext += '\nSixth task:\n'
-    pretext += ui.get_separator()
-    pretext += '\nChanged Jemima Foreman\'s phone number'
-    ui.display_results_table(pretext, ('First name', 'Last name', 'Phone number'), results)
-
-
-def seventh_task(cursor):
-    query = "DELETE FROM applicants WHERE email LIKE '%@mauriseu.net'"
-    cursor.execute(query)
-    pretext = ui.get_separator()
-    pretext += '\nSeventh task:\n'
-    pretext += ui.get_separator()
-    pretext += '\nDeleted the applicants with the domain "mauriseu.net"'
-    ui.display_message(pretext)
-
-TASKS = {
-    '1': first_task,
-    '2': second_task,
-    '3': third_task,
-    '4': fourth_task,
-    '5': fifth_task,
-    '6': sixth_task,
-    '7': seventh_task
-}
+def connect_to_db(func):
+    def wrapper(*args, **kwargs):
+        connection_data = {
+            'dbname': os.environ.get('MY_PSQL_DBNAME'),
+            'user': os.environ.get('MY_PSQL_USER'),
+            'host': os.environ.get('MY_PSQL_HOST'),
+            'password': os.environ.get('MY_PSQL_PASSWORD')
+        }
+        if any(map(lambda x: x is None, connection_data.values())):
+            abort(500, 'No database config found.')
+        connect_string = "dbname='{dbname}' user='{user}' host='{host}' password='{password}'"
+        connect_string = connect_string.format(**connection_data)
+        try:
+            global cursor
+            connection = psycopg2.connect(connect_string)
+            connection.autocommit = True
+            cursor = connection.cursor()
+            result = func(*args, **kwargs)
+            cursor.close()
+            connection.close()
+            return result
+        except Exception as e:
+            abort(500, e)
+    return wrapper

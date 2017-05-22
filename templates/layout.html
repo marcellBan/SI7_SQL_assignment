@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    {% block head %}
+    <link rel="stylesheet" href="/static/css/style.css">
+    <title>{% block title %}{% endblock %} - SQL Assignment</title>
+    {% endblock %}
+  </head>
+  <body>
+    <header>
+      {% block header %}
+      <h1>SQL Assignment</h1>
+      {% endblock %}
+    </header>
+    <div id="content">
+      {% block content %}{% endblock %}
+    </div>
+    <footer>
+      {% block footer %}
+      &copy; Night5word 2017
+      {% endblock %}
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,10 @@
+{% extends "layout.html" %}
+{% block title %}Inernal error{% endblock %}
+{% block content %}
+  <h2>UhOh...</h2>
+  <p>It looks like our developers forgot about something.<br>
+  Please send them a short description of what you were trying to do and the message below.<br>
+  You can find them on <a href="https://github.com/marcellBan/SI7_SQL_assignment">GitHub</a>
+  </p>
+  <pre>{{ message }}</pre>
+{% endblock %}
